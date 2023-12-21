@@ -34,6 +34,13 @@ module.exports = function (config) {
     },
     reporters: ['progress', 'kjhtml'],
     browsers: ['ChromeHeadless'],
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    webpack: {
+      transformPath: (filepath) => {
+          // force *.js files by default
+          const info = path.parse(filepath);
+          return `${path.join(info.dir, info.name)}.js`;
+        },
+    },
   });
 };
